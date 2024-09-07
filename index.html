@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact List</title>
+    <link rel="stylesheet" href="./styles/tailwind.css">
+    <link rel="stylesheet" href="./styles/svg.css">
+</head>
+<body onload="updateUI()">
+    <main class="bg-gradient-to-br from-white to-fuchsia-200 h-screen flex justify-center items-center font-sans relative">
+        <!-- Main Container -->
+        <div id="container" class="bg-white shadow-2xl rounded-xl w-[min(80rem,_80vw)] h-[min(35rem,_90vh)] p-5">
+
+            <!-- Header -->
+            <div class="flex w-full justify-between items-center font-bold">
+                <p class="text-lg">Contacts</p>
+                <button 
+                    class="bg-fuchsia-400 active:bg-fuchsia-500 transition-all px-4 py-1 text-white rounded-lg text-sm" 
+                    onclick="openResetDialog()"
+                >
+                    Add Contact
+                </button>
+            </div>
+
+            <!-- Horizontal Line -->
+            <hr class="mt-5 mb-3 border-t-2">
+
+            <!-- Table -->
+            <div class="min-w-full h-4/5 overflow-y-scroll">
+                <table class="w-[max(100%,_30rem)] text-gray-400 text-sm text-left">
+                
+                    <!-- Table Header -->
+                    <thead>
+                        <tr class="text-xs h-8">
+                            <th>Name</th>
+                            <th>Relation</th>
+                            <th>Email Address</th>
+                            <th>Contact Number</th>
+                        </tr>
+                    </thead>
+                    <!-- Table Body -->
+                    <tbody id="tbody" class="text-black overflow-scroll">
+                        <tr>
+                            <th>
+                                <span class="profile--svg size-3"></span>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- Filter -->
+        <div id="filter" class="hidden w-full h-full bg-black bg-opacity-50 absolute z-10 flex justify-center items-center">
+
+            <!-- Dialog Container -->
+            <div class="bg-white shadow-2xl rounded-xl w-[min(40rem,_70vw)] min-h-[min(45rem,_60vh)] p-5 overflow-hidden">
+
+                <!-- Header -->
+                <div class="w-full flex justify-between">
+                    <p class="font-bold">Contact Form</p>
+
+                    <!-- Close Button -->
+                    <button
+                        class="flex justify-center items-center rounded-full bg-red-500 active:bg-red-700 p-1"
+                        onclick="closeDialog()"
+                    >
+                        <span class="close--svg size-4 bg-white"></span>
+                    </button>
+                </div>
+
+                <hr class="border-t-2 my-5">
+
+                <!-- Form -->
+                <form id="form" class="flex flex-col justify-center items-center gap-2" onsubmit="manageContact(event)">
+                    <input id="index" name="index" type="hidden" value="-1">
+                    <!-- Name -->
+                    <div class="flex flex-col md:flex-row gap-x-10 justify-center w-full">
+                        <div class="flex flex-col w-full">
+                            <label for="firstName" class="text-[0.6rem] pl-1">First Name</label>
+                            <input required id="firstName" name="firstName" type="text" class="w-full shadow-md rounded-md my-1 px-2 py-1 text-sm">
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <label for="lastName" class="text-[0.6rem] pl-1">Last Name</label>
+                            <input required id="lastName" name="lastName" type="text" class="w-full shadow-md rounded-md my-1 px-2 py-1 text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Relation -->
+                    <div class="flex justify-center w-full">
+                        <div class="flex flex-col w-full">
+                            <label for="relation" class="text-[0.6rem] pl-1">Relation</label>
+                            <select required id="relation" name="relation" type="text" class="w-full shadow-md rounded-md my-1 px-2 py-1 text-sm">
+                                <option value="Family">Family</option>
+                                <option value="Friend">Friend</option>
+                                <option value="Partner">Parter</option>
+                                <option value="Acquaintance">Acquaintance</option>
+                                <option value="Self">Self</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Contact Details -->
+                    <div class="flex flex-col md:flex-row gap-x-10 justify-center w-full">
+
+                        <!-- Email -->
+                        <div class="flex flex-col w-full">
+                            <label for="email" class="text-[0.6rem] pl-1">Email</label>
+                            <input required id="email" name="email" type="email" class="w-full shadow-md rounded-md my-1 px-2 py-1 text-sm">
+                        </div>
+
+                        <!-- Contact Number  -->
+                        <div class="flex flex-col w-full">
+                            <label for="number" class="text-[0.6rem] pl-1">Contact Number (e.g. 09123456789)</label>
+                            <input required id="number" name="number" type="text" class="w-full shadow-md rounded-md my-1 px-2 py-1 text-sm" pattern="[0]{1}[9]{1}[0-9]{9}">
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center w-full">
+                        <input type="submit" class="w-full shadow-md rounded-md my-2 py-2 text-sm bg-green-400 active:bg-green-500 text-white font-medium hover:cursor-pointer" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </main>
+    <script src="./script/main.js"></script>
+</body>
+</html>
